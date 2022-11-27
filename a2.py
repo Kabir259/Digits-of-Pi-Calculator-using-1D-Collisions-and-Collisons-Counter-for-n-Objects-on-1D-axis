@@ -153,24 +153,10 @@ def listCollisions(M, x, v, m, T):
         t = len(track)
 
         for i in range(t):
-            # v_new = collVel(v[i], v[i + 1], M[i], M[i + 1])
-            # v[track[i]] = v_new[0]
-            # placeholder[track[i]] = placeholder[track[i] + 1] = tlu
-            # v[track[i] + 1] = v_new[1]
-            # x[track[i]] = x[track[i] + 1] = trueOutput[i][2]
             v[track[i]] = ((M[track[i]] - M[track[i] + 1]) * v[track[i]] + 2 * M[track[i] + 1] * v[track[i] + 1]) / (M[track[i]] + M[track[i] + 1])
             v[track[i] + 1] = ((M[track[i] + 1] - M[track[i]]) * v[track[i] + 1] + 2 * M[track[i]] * v[track[i]]) / (M[track[i]] + M[track[i] + 1])
             placeholder[track[i]] = placeholder[track[i] + 1] = tlu
             x[track[i]] = x[track[i] + 1] = trueOutput[i][2]
-            #
-            # if track[i] > 0:
-            #     newNodeMaterial = newNodeMaker(x[track[i]], x[track[i] - 1], v[track[i]], v[track[i] - 1], tlu, placeholder[track[i] - 1], T)
-            #     newNode = heapNode(newNodeMaterial[0], track[i], newNodeMaterial[1], 0)
-            #     heap.modify(heapNode(T + 1, track[i] - 1, x[track[i]], 0)) if v[track[i] + 1] >= v[track[i]] else heap.modify(newNode)
-            # if track[i] < n - 2:
-            #     newNodeMaterial = newNodeMaker(x[track[i] + 2], x[track[i] + 1], v[track[i] + 2], v[track[i] + 1], tlu, placeholder[track[i] + 1], T)
-            #     newNode = heapNode(newNodeMaterial[0], track[i] + 1, newNodeMaterial[1], 0)
-            #     heap.modify(heapNode(T + 1, track[i] + 1, x[track[i] + 1], 0)) if v[track[i] + 2] >= v[track[i] + 1] else heap.modify(newNode)
 
             if track[i] > 0:
                 time1 = abs(x[track[i]] - x[track[i] - 1] - v[track[i] - 1] * (tlu - placeholder[track[i] - 1])) / abs(v[track[i]] - v[track[i] - 1])
